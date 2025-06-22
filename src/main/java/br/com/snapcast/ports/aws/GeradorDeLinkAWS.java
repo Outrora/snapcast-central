@@ -1,10 +1,9 @@
-package br.com.snapcast.ports.s3;
+package br.com.snapcast.ports.aws;
 
-import java.net.URI;
 import java.net.URL;
-import java.time.Duration;
 
 import br.com.snapcast.configs.aws.S3Config;
+import br.com.snapcast.ports.adapter.cloud.GeradorDeLinks;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import lombok.AllArgsConstructor;
@@ -14,10 +13,11 @@ import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignReques
 
 @ApplicationScoped
 @AllArgsConstructor(onConstructor = @__(@Inject))
-public class GeradorDeLink {
+public class GeradorDeLinkAWS implements GeradorDeLinks {
 
     S3Config s3;
 
+    @Override
     public URL criarLinkTemporario(String key) {
         try (S3Presigner presigner = s3.geraPresignRequest()) {
             GetObjectRequest getObjectRequest = GetObjectRequest.builder()

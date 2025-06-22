@@ -3,8 +3,8 @@ package br.com.snapcast.domain.user_cases;
 import java.net.URL;
 import java.util.UUID;
 
+import br.com.snapcast.ports.adapter.cloud.GeradorDeLinks;
 import br.com.snapcast.ports.database.interfaces.VideoDatabase;
-import br.com.snapcast.ports.s3.GeradorDeLink;
 import br.com.snapcast.shared.exception.VideoNaoCadastrado;
 import br.com.snapcast.shared.exception.ZipNaoEncontrado;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -17,7 +17,7 @@ import lombok.extern.java.Log;
 @Log
 public class GerarLinkUserCase {
 
-    GeradorDeLink link;
+    GeradorDeLinks link;
     VideoDatabase database;
 
     public URL criarLinkTemporario(UUID id) {

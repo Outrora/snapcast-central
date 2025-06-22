@@ -1,6 +1,7 @@
-package br.com.snapcast.ports.s3;
+package br.com.snapcast.ports.aws;
 
 import br.com.snapcast.configs.aws.CoginitoConfig;
+import br.com.snapcast.ports.adapter.cloud.PegarEmail;
 import br.com.snapcast.shared.exception.UsuarioNaoCadastro;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -12,10 +13,11 @@ import software.amazon.awssdk.services.cognitoidentityprovider.model.AttributeTy
 
 @ApplicationScoped
 @AllArgsConstructor(onConstructor = @__(@Inject))
-public class PegarEmail {
+public class PegarEmailCoginitoAWS implements PegarEmail {
 
     CoginitoConfig config;
 
+    @Override
     public String pegarEmailAtravesUsername(String username) {
         CognitoIdentityProviderClient cognitoClient = config.clienteCogito();
 

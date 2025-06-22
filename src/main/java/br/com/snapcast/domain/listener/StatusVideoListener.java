@@ -1,9 +1,9 @@
 package br.com.snapcast.domain.listener;
 
 import br.com.snapcast.domain.entity.StatusProcessamento;
-import br.com.snapcast.domain.entity.StatusVideo;
+
 import br.com.snapcast.domain.entity.StatusVideoId;
-import br.com.snapcast.ports.s3.PegarEmail;
+import br.com.snapcast.ports.adapter.cloud.PegarEmail;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
 import jakarta.enterprise.event.TransactionPhase;
