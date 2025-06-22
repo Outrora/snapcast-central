@@ -23,13 +23,22 @@ public class Video {
     private String url;
     private StatusProcessamento status;
     private LocalDateTime horaUpload;
+    private String idUsuario;
 
     public String nomeDoVideoOriginalComExtensao() {
         return nome + "." + formatoVideo;
     }
 
+    private String idComExtensao(String extensao) {
+        return id + "." + extensao;
+    }
+
     public String nomeDoVideo() {
-        return id + "." + formatoVideo;
+        return idComExtensao(formatoVideo);
+    }
+
+    public String arquivoZip() {
+        return idComExtensao("zip");
     }
 
     public void alteraUrl(URL uri) {

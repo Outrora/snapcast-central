@@ -27,6 +27,7 @@ import lombok.extern.java.Log;
 @Path("login")
 @RequestScoped
 @Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @AllArgsConstructor(onConstructor = @__(@Inject))
 @Log
 @Tag(name = "Login", description = "Endpoints relacionado a login")
@@ -37,7 +38,7 @@ public class LoginApi {
     @POST()
     @RunOnVirtualThread
     @Operation(summary = "Para Realizar o Login")
-    @Produces(MediaType.APPLICATION_JSON)
+
     public String login(LoginRequest request) {
         return userCase.authenticate(request.email(), request.senha());
     }

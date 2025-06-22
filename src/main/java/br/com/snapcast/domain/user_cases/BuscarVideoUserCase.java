@@ -6,7 +6,6 @@ import java.util.UUID;
 import br.com.snapcast.domain.entity.StatusProcessamento;
 import br.com.snapcast.domain.entity.Video;
 import br.com.snapcast.ports.database.interfaces.VideoDatabase;
-import br.com.snapcast.ports.s3.GeradorDeLink;
 import br.com.snapcast.shared.exception.VideoNaoCadastrado;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -19,17 +18,9 @@ import lombok.extern.java.Log;
 public class BuscarVideoUserCase {
 
     VideoDatabase database;
-    GeradorDeLink link;
 
     public List<Video> buscarTodosVideos() {
-        return database.buscarTodos()
-                .stream()
-                .map((video) -> {
-                    var url = link.criarLinkTemporario(video.nomeDoVideo());
-                    video.alteraUrl(url);
-                    return video;
-                })
-                .toList();
+        return database.buscarTodos();
     }
 
     public Video buscarPeloId(String id) {

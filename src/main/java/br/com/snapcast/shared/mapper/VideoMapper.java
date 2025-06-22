@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 import br.com.snapcast.domain.entity.StatusProcessamento;
+import br.com.snapcast.domain.entity.StatusVideo;
+import br.com.snapcast.domain.entity.StatusVideoId;
 import br.com.snapcast.domain.entity.Video;
 import br.com.snapcast.ports.database.dto.VideoDTO;
 import br.com.snapcast.ports.event.entity.VideoEvento;
@@ -17,6 +19,7 @@ public interface VideoMapper {
                 .formatoVideo(evento.formatoVideo())
                 .tamanhoVideo(evento.tamanhoVideo())
                 .url(evento.caminhoVideo())
+                .idUsuario(evento.idUsuario())
                 .horaUpload(LocalDateTime.now())
                 .status(StatusProcessamento.NAO_INICIADO)
                 .build();
@@ -28,6 +31,7 @@ public interface VideoMapper {
                 .nome(dto.getNome())
                 .formatoVideo(dto.getFormatoVideo())
                 .tamanhoVideo(dto.getTamanhoVideo())
+                .idUsuario(dto.getIdUsuario())
                 .url(dto.getUrl())
                 .horaUpload(dto.getHoraUpload())
                 .status(dto.getStatus())
@@ -41,8 +45,10 @@ public interface VideoMapper {
                 .formatoVideo(video.getFormatoVideo())
                 .tamanhoVideo(video.getTamanhoVideo())
                 .url(video.getUrl())
+                .idUsuario(video.getIdUsuario())
                 .status(video.getStatus())
                 .horaUpload(video.getHoraUpload())
                 .build();
     }
+
 }

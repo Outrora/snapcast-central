@@ -44,6 +44,7 @@ public class BuscarApi {
     @GET()
     @Path("{id}")
     @RunOnVirtualThread
+    @Authenticated
     @Operation(summary = "Busca  o video a ser processado")
     public Video buscarPeloId(@PathParam("id") String id) {
         return userCase.buscarPeloId(id);
@@ -51,6 +52,7 @@ public class BuscarApi {
 
     @POST()
     @RunOnVirtualThread
+    @Authenticated
     @Operation(summary = "Buscar todos os video de acordo com o estado")
     public List<Video> buscarPeloId(BucarEstadoRequest request) {
         return userCase.buscarPeloStatus(request.status());

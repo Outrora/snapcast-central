@@ -35,6 +35,7 @@ public class VideoDTO {
     private String url;
     private StatusProcessamento status;
     private LocalDateTime horaUpload;
+    private String idUsuario;
     private int quandidadeFrames;
 
 }

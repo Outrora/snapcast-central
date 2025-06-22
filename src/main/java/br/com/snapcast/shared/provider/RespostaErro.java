@@ -10,12 +10,27 @@ public record RespostaErro(
                 int code,
                 String error,
                 LocalDateTime timestamp) {
+
         public static Response criarRespostaErro(
                         Exception exception,
                         Response.Status status) {
                 var reposta = new RespostaErro(exception.getClass().getName(),
                                 status.getStatusCode(),
                                 exception.getMessage(),
+                                LocalDateTime.now());
+
+                return Response
+                                .status(status.getStatusCode())
+                                .entity(reposta)
+                                .build();
+        }
+
+        public static Response criarRespostaErro(
+                        Exception exception,
+                        Response.Status status, String Mensagem) {
+                var reposta = new RespostaErro(exception.getClass().getName(),
+                                status.getStatusCode(),
+                                Mensagem,
                                 LocalDateTime.now());
 
                 return Response
