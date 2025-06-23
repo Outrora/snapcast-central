@@ -17,8 +17,8 @@ import lombok.extern.java.Log;
 @Log
 public class StatusVideoListener {
 
-    PegarEmail pegarEmail;
-    EnviarEmailUserCase enviarEmailUserCase;
+    private PegarEmail pegarEmail;
+    private EnviarEmailUserCase enviarEmailUserCase;
 
     public void observarStatus(@Observes(during = TransactionPhase.AFTER_SUCCESS) StatusVideoId status) {
         log.info("Status do video %s alterado com sucesso".formatted(status.id()));
