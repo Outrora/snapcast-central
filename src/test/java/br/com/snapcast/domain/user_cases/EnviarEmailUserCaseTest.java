@@ -13,8 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import static org.awaitility.Awaitility.await;
-
 import br.com.snapcast.criar_objetos.criarVideos;
 import io.quarkus.mailer.Mailer;
 

@@ -26,10 +26,7 @@ public class GeradorDeLinkAWS implements GeradorDeLinks {
                     .build();
 
             GetObjectPresignRequest presignRequest = s3.geraObjectPresignRequest(getObjectRequest);
-
             URL url = presigner.presignGetObject(presignRequest).url();
-
-            System.out.println("URL temporária: " + url);
             return url;
         }
     }
