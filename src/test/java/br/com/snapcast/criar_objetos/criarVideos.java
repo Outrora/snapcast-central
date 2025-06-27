@@ -1,19 +1,21 @@
 package br.com.snapcast.criar_objetos;
 
+import br.com.snapcast.domain.entity.StatusProcessamento;
+import br.com.snapcast.domain.entity.StatusVideo;
+import br.com.snapcast.domain.entity.StatusVideoId;
+import br.com.snapcast.domain.entity.Video;
+import br.com.snapcast.ports.database.dto.VideoDTO;
+import br.com.snapcast.ports.event.entity.VideoEvento;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
-import br.com.snapcast.domain.entity.StatusProcessamento;
-import br.com.snapcast.domain.entity.StatusVideo;
-import br.com.snapcast.domain.entity.StatusVideoId;
-import br.com.snapcast.domain.entity.Video;
-
 public interface criarVideos {
-    static String[] formatos = { "mp4", "avi", "mov" };
-    static String[] nomes = { "videoAula", "tutorial", "entrevista", "demo" };
+    static String[] formatos = {"mp4", "avi", "mov"};
+    static String[] nomes = {"videoAula", "tutorial", "entrevista", "demo"};
 
     static Video criar() {
 
@@ -22,6 +24,42 @@ public interface criarVideos {
 
         return criar(status);
 
+    }
+
+    static VideoEvento evento() {
+        var video = criar();
+        return new VideoEvento(
+                video.getId(),
+                video.getNome(),
+                video.getFormatoVideo(),
+                video.getTamanhoVideo(),
+                video.getUrl(),
+                video.getIdUsuario()
+        );
+    }
+
+    static VideoDTO criarDTO() {
+
+        StatusProcessamento status = StatusProcessamento.values()[ThreadLocalRandom.current()
+                .nextInt(StatusProcessamento.values().length)];
+
+        return VideoDTO.builder()
+                .id(UUID.randomUUID())
+                .nome(nomes[ThreadLocalRandom.current().nextInt(nomes.length)])
+                .formatoVideo(formatos[ThreadLocalRandom.current().nextInt(formatos.length)])
+                .tamanhoVideo(ThreadLocalRandom.current().nextLong(10_000_000, 500_000_000))
+                .url("https://videos.exemplo.com/")
+                .status(status)
+                .horaUpload(LocalDateTime.now().minusDays(ThreadLocalRandom.current().nextInt(0, 30)))
+                .idUsuario(UUID.randomUUID().toString())
+                .quandidadeFrames(ThreadLocalRandom.current().nextInt(10, 500))
+                .build();
+    }
+
+    static List<VideoDTO> criarListaDTO() {
+        return IntStream.range(2, 10)
+                .mapToObj(i -> criarDTO())
+                .toList();
     }
 
     static List<Video> criarLista() {
