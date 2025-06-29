@@ -68,6 +68,7 @@ public class LoginCoginitoAWS implements Login {
         return response.authenticationResult().accessToken();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void criarUsuario(String email, String senha) {
 
